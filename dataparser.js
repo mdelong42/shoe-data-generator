@@ -41,11 +41,16 @@ fs.readFile("./shoes.csv", "utf8", (err, fileRes) => {
         ];
         // need to add reviews column to data (reviews: [{user: STRING, date: DATE, stars: NUMBER, title: STRING, description: STRING},...]);
         currShoe["sizes"] = [7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12];
-        let randomDesc = Math.floor((descriptions.length* Math.random()));
+        let randomDesc = Math.floor(descriptions.length * Math.random());
         currShoe["description"] = descriptions[randomDesc];
       }
       shoeArray.push(currShoe);
     }
-    console.log(shoeArray);
+    // console.log(shoeArray);
+    fs.writeFile("./shoeData.json", JSON.stringify(shoeArray), err => {
+      if (err) {
+        console.log("There was an error writing the file");
+      }
+    });
   }
 });
